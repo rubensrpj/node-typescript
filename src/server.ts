@@ -1,14 +1,11 @@
-import express from 'express';
+import express, { response } from 'express';
+import bodyparse from 'body-parser'
 
 const app = express();
-app.get('/', (req, res) => {
-    return res.send('Ok!');
-});
+app.use(bodyparse.json());
 app.post('/sum', (req, res) => {
-    const  data = req.body.data
+    const data = req.body
     const result = data.value1 + data.value2
-    return res.send(result);
+    res.send(JSON.stringify(result))
 });
 app.listen(4003);
-
-
